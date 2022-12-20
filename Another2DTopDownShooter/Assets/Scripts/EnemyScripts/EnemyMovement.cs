@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour
 {
     public float enemySpeed;
 
-    public GameObject Player;
+    private GameObject Player;
     private Rigidbody2D PlayerRb;
 
     private Rigidbody2D enemyRb;
@@ -14,6 +14,7 @@ public class EnemyMovement : MonoBehaviour
     private void Awake()
     {
         enemyRb = gameObject.GetComponent<Rigidbody2D>();
+        Player = GameObject.FindGameObjectWithTag("Player");
         PlayerRb = Player.GetComponent<Rigidbody2D>();
     }
 

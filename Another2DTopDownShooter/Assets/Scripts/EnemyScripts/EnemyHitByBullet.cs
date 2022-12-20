@@ -28,5 +28,10 @@ public class EnemyHitByBullet : MonoBehaviour
             Destroy(eff, 1f);
             Destroy(gameObject, 1f);
         }
+
+        if (collision.transform.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
