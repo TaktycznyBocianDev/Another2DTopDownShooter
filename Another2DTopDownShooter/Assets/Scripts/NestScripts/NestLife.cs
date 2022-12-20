@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class NestLife : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject enemies;
+
+    void Awake()
     {
-        
+       Collider2D enemyCollider = enemies.GetComponent<Collider2D>();
+       Physics2D.IgnoreCollision(enemyCollider, GetComponent<Collider2D>(), true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
