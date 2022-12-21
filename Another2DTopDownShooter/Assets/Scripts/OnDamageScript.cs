@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OnDamageScript : MonoBehaviour
@@ -15,9 +13,8 @@ public class OnDamageScript : MonoBehaviour
     public AudioSource damageSound;
     public AudioSource diedSound;
 
-    [Header("Sprites for difrent live times")]
-    public SpritesChangeOverDamage objectSprites;
-
+    public GameObject healthBarObj;
+    private HealthBarScript healthBar;
     public ParticleSystem diedEfect;
     public SpriteRenderer objectSpriteRenderer;
     public Collider2D objectCollider;
@@ -26,6 +23,8 @@ public class OnDamageScript : MonoBehaviour
     {
         diedEfect.Stop();
         currentHpAmount = hpAmount;
+        healthBar = healthBarObj.GetComponent<HealthBarScript>();
+        healthBar.SetMAXHealth(hpAmount);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,7 +39,7 @@ public class OnDamageScript : MonoBehaviour
         {
             damageSound.Play();
             currentHpAmount--;
-            SpritesChange();
+            healthBar.SetHealt(currentHpAmount);
 
             Debug.Log(gameObject.name + "hp: " + currentHpAmount.ToString());
 
@@ -53,6 +52,7 @@ public class OnDamageScript : MonoBehaviour
         if (hp <= 0)
         {
             diedSound.Play();
+            Destroy(healthBarObj);
             Destroy(objectSpriteRenderer);
             Destroy(objectCollider);
 
@@ -68,27 +68,5 @@ public class OnDamageScript : MonoBehaviour
 
         }
     }
-
-    private void SpritesChange()
-    {
-        if (objectSprites != null)
-        { 
-            Sprite[] sprites = objectSprites.sprites;
-            float hpChange = hpAmount / sprites.Length;
-
-            for (int i = 0; i < sprites.Length; i++)
-            {
-
-                if (currentHpAmount <= currentHpAmount - hpChange * i && currentHpAmount >= currentHpAmount - hpChange * (i+1))
-                {
-                    objectSpriteRenderer.sprite = sprites[i];
-                }
-
-            }
-        }
-        
-
-    }
-
 
 }

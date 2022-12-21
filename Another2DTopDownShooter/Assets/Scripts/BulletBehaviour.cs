@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
     private void Awake()
     {
+        //To destroy bullet in mid-air after some time
         Destroy(gameObject, 3f);
     }
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NestLife : MonoBehaviour
@@ -8,8 +6,8 @@ public class NestLife : MonoBehaviour
 
     void Awake()
     {
-       Collider2D enemyCollider = enemies.GetComponent<Collider2D>();
-       Physics2D.IgnoreCollision(enemyCollider, GetComponent<Collider2D>(), true);
+        Collider2D enemyCollider = enemies.GetComponent<Collider2D>();                // Get the collider component attached to the enemy game object
+        Physics2D.IgnoreCollision(enemyCollider, GetComponent<Collider2D>(), true);  // Ignore collisions between the enemy and the nest
     }
 
 
